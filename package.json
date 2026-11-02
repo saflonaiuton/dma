@@ -1,0 +1,20 @@
+{
+  "name": "filipino-dama",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Filipino Dama web game with online multiplayer on Render",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "connect-pg-simple": "^10.0.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "pg": "^8.16.3"
+  }
+}
