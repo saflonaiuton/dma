@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#140f0b" />
+    <meta
+      name="description"
+      content="Play Filipino Dama — the classic flying-king checkers game. Challenge a friend locally or meet an opponent online."
+    />
+    <title>Filipino Dama — The Flying Dama</title>
+    <link rel="preload" as="image" href="/assets/dama-hero.webp" />
+    <link rel="stylesheet" href="/assets/site.css?v=2" />
+    <script>
+      window.DAMA_BOOT = {};
+    </script>
+    <script src="/assets/game.js?v=2" defer></script>
+  </head>
+  <body>
+    <main id="homeScreen" class="home-screen">
+      <div class="home-topbar">
+        <a class="brand" href="#home" aria-label="Filipino Dama home">
+          <span class="brand-seal" aria-hidden="true"><span>F</span></span>
+          <span class="brand-small"
+            >A game of<br /><b>heritage & strategy</b></span
+          >
+        </a>
+        <div class="top-note">
+          <span class="live-dot"></span> MADE FOR THE NEXT GENERATION
+        </div>
+      </div>
+      <section class="hero" aria-label="Filipino Dama home page">
+        <div
+          class="hero-art"
+          role="img"
+          aria-label="A traditional wooden Dama board with ivory and black pieces on a walnut table"
+        ></div>
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+          <p class="kicker">
+            <span></span> THE PHILIPPINES’ CLASSIC BOARD GAME <span></span>
+          </p>
+          <h1 class="wordmark"><span>FILIPINO</span><b>DAMA</b></h1>
+          <p class="hero-tagline">
+            One board. Two minds.<br /><em>Let the dama fly.</em>
+          </p>
+          <div class="heritage-line">
+            <i></i><span>SAPILITANG KAIN · LUMILIPAD NA DAMA</span><i></i>
+          </div>
+        </div>
+        <nav class="main-menu" aria-label="Main menu">
+          <div class="premium-row">
+            <span class="premium-gem">✦</span><span>PREMIUM</span
+            ><span class="premium-rule"></span
+            ><button
+              type="button"
+              class="premium-link"
+              data-open="premiumModal"
+            >
+              EXPLORE
+            </button>
+          </div>
+          <button class="menu-button" type="button" data-open="singleModal">
+            <span class="menu-number">01</span><span>SINGLE PLAYER</span
+            ><span class="menu-arrow">↗</span>
+          </button>
+          <button class="menu-button" type="button" data-action="two-player">
+            <span class="menu-number">02</span><span>TWO PLAYERS</span
+            ><span class="menu-arrow">↗</span>
+          </button>
+          <button
+            class="menu-button menu-online"
+            type="button"
+            data-open="onlineModal"
+          >
+            <span class="menu-number">03</span><span>ONLINE GAME</span
+            ><span class="online-mark">●</span
+            ><span class="menu-arrow">↗</span>
+          </button>
+          <button class="menu-button" type="button" data-open="statsModal">
+            <span class="menu-number">04</span><span>STATISTICS</span
+            ><span class="menu-arrow">↗</span>
+          </button>
+          <button class="menu-button" type="button" data-open="settingsModal">
+            <span class="menu-number">05</span><span>SETTINGS</span
+            ><span class="menu-arrow">↗</span>
+          </button>
+          <div class="menu-foot">
+            <span>8 × 8 · 12 PIECES · 1 GOAL</span
+            ><button type="button" data-open="rulesModal">
+              HOW TO PLAY <b>↗</b>
+            </button>
+          </div>
+        </nav>
+        <div class="hero-bottom">
+          <span><b>01</b> / FILIPINO DAMA</span
+          ><span>PLAY THE GAME THAT FLIES</span
+          ><span class="hero-scroll">SCROLL TO EXPLORE <i>↓</i></span>
+        </div>
+      </section>
+      <footer class="home-footer">
+        <span>FILIPINO DAMA <i>·</i> A GAME PASSED HAND TO HAND</span
+        ><span>LOCAL PLAY · ONLINE MATCHES · CLASSIC RULES</span>
+      </footer>
+    </main>
+
+    <main id="gameScreen" class="game-screen" hidden>
+      <header class="game-header">
+        <button type="button" class="back-button" id="backHome">
+          ← <span>MAIN MENU</span>
+        </button>
+        <div class="game-brand">
+          <span class="brand-seal small-seal"><span>F</span></span
+          ><span>FILIPINO <b>DAMA</b></span>
+        </div>
+        <div class="room-chip" id="roomChip" hidden>
+          ROOM <b id="roomCodeLabel">------</b
+          ><button type="button" id="copyRoom" aria-label="Copy room invite">
+            COPY
+          </button>
+        </div>
+      </header>
+      <section class="game-layout">
+        <div class="board-column">
+          <div class="game-statusbar">
+            <div class="player-badge" id="turnBadge">
+              <span class="player-token"></span
+              ><span
+                ><b id="turnTitle">Light to move</b
+                ><small id="turnSubtitle">Choose a piece</small></span
+              >
+            </div>
+            <div class="game-status-right">
+              <span class="status-caption">TABLE STATUS</span
+              ><b id="statusText">Ready</b>
+            </div>
+          </div>
+          <div class="board-frame">
+            <div
+              id="gameBoard"
+              class="game-board"
+              role="grid"
+              aria-label="Filipino Dama board"
+            ></div>
+          </div>
+          <div class="board-caption">
+            <span>ONLY THE DARK SQUARES ARE IN PLAY</span
+            ><span>TURN <b id="turnNumber">01</b></span>
+          </div>
+        </div>
+        <aside class="game-sidebar">
+          <section
+            class="side-panel online-status-panel"
+            id="onlineStatusPanel"
+            hidden
+          >
+            <div class="panel-eyebrow">ONLINE TABLE</div>
+            <h2 id="onlinePanelTitle">Waiting for opponent</h2>
+            <p id="onlinePanelText">
+              Share your six-character room code with a friend.
+            </p>
+            <div class="online-dot-row">
+              <i></i><span id="connectionStatus">Connecting</span>
+            </div>
+          </section>
+          <section class="side-panel score-panel">
+            <div class="panel-eyebrow">PIECES IN PLAY</div>
+            <div class="score-player">
+              <span class="score-token light-token"></span
+              ><span class="score-name" id="lightName">LIGHT</span
+              ><b id="lightCount">12</b>
+            </div>
+            <div class="captured-strip" id="lightCaptured"></div>
+            <div class="score-player">
+              <span class="score-token dark-token"></span
+              ><span class="score-name" id="darkName">DARK</span
+              ><b id="darkCount">12</b>
+            </div>
+            <div class="captured-strip" id="darkCaptured"></div>
+            <div class="quiet-rule">
+              <div>
+                <span>40 QUIET TURNS</span><b id="quietCount">0 / 40</b>
+              </div>
+              <div class="quiet-track"><i id="quietFill"></i></div>
+            </div>
+          </section>
+          <section class="side-panel history-panel">
+            <div class="panel-heading">
+              <div>
+                <div class="panel-eyebrow">THE RECORD</div>
+                <h2>Recent moves</h2>
+              </div>
+              <span class="history-count" id="historyCount">00</span>
+            </div>
+            <div id="moveHistory" class="move-history">
+              <p class="muted-copy">The first move is yours.</p>
+            </div>
+          </section>
+          <div class="game-actions">
+            <button type="button" class="small-action" id="undoButton">
+              ↶ <span>UNDO TURN</span></button
+            ><button type="button" class="small-action" id="flipButton">
+              ↻ <span>FLIP BOARD</span></button
+            ><button
+              type="button"
+              class="small-action danger-action"
+              id="leaveButton"
+              hidden
+            >
+              × <span>LEAVE GAME</span>
+            </button>
+          </div>
+          <p class="side-note">
+            A man moves forward. It captures both ways.<br /><b
+              >A dama flies across the diagonal.</b
+            >
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="singleModal" hidden>
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="singleTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-ornament">✦</div>
+        <div class="modal-kicker">A FRIENDLY CHALLENGE</div>
+        <h2 id="singleTitle">Play the computer</h2>
+        <p>
+          Choose your side at the table. The computer plays the opposite color.
+        </p>
+        <label class="field-label" for="humanSide">YOUR PIECES</label
+        ><select id="humanSide">
+          <option value="light">Light — first move</option>
+          <option value="dark">Dark — let the computer open</option></select
+        ><label class="field-label" for="aiLevel">OPPONENT</label
+        ><select id="aiLevel">
+          <option value="calm">Calm — thoughtful practice</option>
+          <option value="sharp">Sharp — captures first</option></select
+        ><button type="button" class="gold-button full-button" id="startSingle">
+          TAKE YOUR SEAT <span>↗</span>
+        </button>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="onlineModal" hidden>
+      <section
+        class="modal-card wide-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="onlineTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-kicker">MEET AT THE BOARD</div>
+        <h2 id="onlineTitle">Online game</h2>
+        <p>
+          Find a player waiting for a match, or create a private table and
+          invite a friend.
+        </p>
+        <div class="nickname-row">
+          <label class="field-label" for="nicknameInput">YOUR TABLE NAME</label>
+          <div class="input-row">
+            <input
+              id="nicknameInput"
+              maxlength="24"
+              autocomplete="nickname"
+            /><button class="outline-button" id="saveName">SAVE</button>
+          </div>
+        </div>
+        <button type="button" class="gold-button full-button" id="quickMatch">
+          FIND A QUICK MATCH <span>↗</span>
+        </button>
+        <div class="lobby-divider"><span>OR PLAY A FRIEND</span></div>
+        <div class="lobby-actions">
+          <button type="button" class="outline-button" id="createRoom">
+            CREATE PRIVATE ROOM <b>＋</b>
+          </button>
+          <form id="joinRoomForm" class="join-form">
+            <input
+              id="joinCode"
+              maxlength="6"
+              placeholder="ROOM CODE"
+              aria-label="Room code"
+              autocomplete="off"
+            /><button type="submit" class="outline-button">
+              JOIN <b>→</b>
+            </button>
+          </form>
+        </div>
+        <p id="lobbyMessage" class="lobby-message" aria-live="polite"></p>
+        <div id="inviteBlock" class="invite-block" hidden>
+          <span>YOUR INVITE CODE</span>
+          <div>
+            <b id="inviteCode">------</b
+            ><button id="copyInvite" type="button" class="outline-button">
+              COPY LINK
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="statsModal" hidden>
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="statsTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-kicker">YOUR TRACK RECORD</div>
+        <h2 id="statsTitle">Statistics</h2>
+        <p class="stats-subtitle" id="statsSubtitle">
+          Your online guest record for this browser.
+        </p>
+        <div class="stat-grid">
+          <div><b id="statGames">0</b><span>GAMES</span></div>
+          <div><b id="statWins">0</b><span>WINS</span></div>
+          <div><b id="statDraws">0</b><span>DRAWS</span></div>
+          <div><b id="statWinRate">—</b><span>WIN RATE</span></div>
+        </div>
+        <div class="local-record">
+          <span>LOCAL PRACTICE</span><b id="localRecord">0 wins · 0 losses</b>
+        </div>
+        <p id="statsMessage" class="lobby-message"></p>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="settingsModal" hidden>
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settingsTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-kicker">MAKE IT YOURS</div>
+        <h2 id="settingsTitle">Settings</h2>
+        <p>Small comforts for a better game at the table.</p>
+        <label class="setting-row"
+          ><span><b>Sound effects</b><small>Move and capture cues</small></span
+          ><input type="checkbox" id="soundSetting" /></label
+        ><label class="setting-row"
+          ><span
+            ><b>Reduced motion</b
+            ><small>Quieter visual transitions</small></span
+          ><input type="checkbox" id="motionSetting" /></label
+        ><button type="button" class="gold-button full-button" data-close>
+          DONE <span>✓</span>
+        </button>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="rulesModal" hidden>
+      <section
+        class="modal-card wide-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="rulesTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-kicker">THE CLASSIC FILIPINO RULES</div>
+        <h2 id="rulesTitle">How to play Dama</h2>
+        <div class="rule-list">
+          <p>
+            <b>12 men each.</b> Light moves first on the 32 dark squares of the
+            8×8 board.
+          </p>
+          <p>
+            <b>Sapilitang kain — captures are compulsory.</b> When choices
+            exist, take a line that captures the most pieces.
+          </p>
+          <p>
+            <b>Men move forward, capture either way.</b> Chain captures continue
+            with the same piece; jumped men stay as blockers until the chain
+            ends.
+          </p>
+          <p>
+            <b>Lumilipad na dama — the flying king.</b> It slides diagonally any
+            distance and can capture from range. Promotion in a chain is
+            immediate.
+          </p>
+          <p>
+            <b>Win</b> by capturing all opposing pieces or leaving them no legal
+            move. <b>Tabla</b> after 40 turns with no capture or man advancing.
+          </p>
+        </div>
+        <button type="button" class="gold-button full-button" data-close>
+          UNDERSTOOD <span>✓</span>
+        </button>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="premiumModal" hidden>
+      <section
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="premiumTitle"
+      >
+        <button class="modal-close" data-close aria-label="Close">×</button>
+        <div class="modal-ornament">✦</div>
+        <div class="modal-kicker">THE GOLD TABLE</div>
+        <h2 id="premiumTitle">Premium is on the way</h2>
+        <p>
+          We're saving a few special boards and table finishes for a future
+          edition. The classic game is free to play.
+        </p>
+        <button type="button" class="gold-button full-button" data-close>
+          BACK TO THE BOARD <span>✓</span>
+        </button>
+      </section>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
